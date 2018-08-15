@@ -1,0 +1,43 @@
+1.	using UnityEngine;
+2.	using System.Collections;
+3.	public class deneme3 : MonoBehaviour
+4.	{
+5.	
+6.	    public Transform startMarker;
+7.	    public Transform endMarker;
+8.	    public float speed = 1.0F;
+9.	
+10.	    private float startTime;
+11.	    private float journeyLength;
+12.	
+    void ElevatorUp()
+13.	    {
+14.	        startTime = Time.time;
+15.	        journeyLength = Vector3.Distance(startMarker.position, endMarker.position);
+16.	    }
+17.	
+18.	    void ElevatorDown()
+19.	    {
+20.	        startTime = Time.time;
+21.	        journeyLength = Vector3.Distance(endMarker.position, startMarker.position);
+22.	    }
+23.	
+24.	    void Update()
+25.	    {
+26.	        if (Input.GetKey(KeyCode.T)) {
+27.	            ElevatorUp();
+28.	            Debug.Log("ElevatorUp");
+29.	        }
+30.	
+31.	        if (Input.GetKey(KeyCode.G))
+32.	        {
+33.	            ElevatorDown();
+34.	            Debug.Log("ElevatorDown");
+35.	        }
+36.	
+37.	        float distCovered = (Time.time - startTime) * speed;
+        float fracJourney = distCovered / journeyLength;
+        transform.position = Vector3.Lerp(startMarker.position, endMarker.position, fracJourney);
+38.	
+39.	    }
+40.	} 
